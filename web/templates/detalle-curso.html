@@ -1,0 +1,40 @@
+{% extends "base-web.html" %}
+{% load static %}
+{% block extrastyle %}
+<link rel="stylesheet" href="{% static 'css/login.css'%}" />
+{% endblock %}
+
+{% block content %}
+<main role="main" class="container">
+    <div class="d-flex align-items-center p-3 my-3 text-white bg-purple rounded box-shadow bg-principal">
+        <div class="lh-100">
+            <h6 class="mb-0 lh-100">MAESTRIA CIENCIAS DE LA INFORMACION Y LAS COMUNICACIONES</h6>
+            <small>DETALLE DEL CURSO {{ curso.nombre|upper }}</small>
+        </div>
+    </div>
+
+    <div class="my-3 p-3 bg-white rounded box-shadow">
+            <div class="media text-muted pt-3 justify-content-center">
+
+                  <div class="card text-center">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ curso.nombre|upper }}</h5>
+                      <p class="card-text">{{ curso.descripcion }}</p>
+                      {% if user.is_authenticated %}
+                      <a href="/inscribir/{{ curso.id }}" class="btn btn-primary bg-button">Incribir curso</a>
+                      {% endif %}
+                    </div>
+                    <div class="card-footer text-muted">
+                      2 days ago
+                    </div>
+                  </div>
+
+
+
+            </div>
+        
+    </div>
+
+    
+</main>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "base-web.html" %}
+{% load static %}
+
+
+{% block content %}
+<main role="main" class="container">
+    <div class="d-flex align-items-center p-3 my-3 text-white bg-purple rounded box-shadow bg-principal">
+        <div class="lh-100">
+            <h6 class="mb-0 lh-100">MAESTRIA CIENCIAS DE LA INFORMACION Y LAS COMUNICACIONES</h6>
+            <small>PROGRAMAS</small>
+        </div>
+    </div>
+
+    <div class="my-3 p-3 bg-white rounded box-shadow">
+        {% for programa in programas %}
+        <div class="media text-muted pt-3 justify-content-center">
+
+            <div class="card text-center">
+                <div class="card-header">
+                    <img data-src="{{ programa.imagen.url }}" class="mr-2 rounded" style="width: 32px; height: 32px;"
+                        src="{{ programa.imagen.url }}" data-holder-rendered="true">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ programa.nombre|upper }}</h5>
+                    <p class="card-text">{{ programa.descripcion }}</p>
+                </div>
+                <div class="card-footer text-muted">
+                    <a href="/detalle-programa/{{ programa.id }}" class="btn btn-primary">Ver cursos</a>
+                </div>
+            </div>
+
+
+        </div>
+        {% endfor %}
+
+    </div>
+
+
+</main>
+{% endblock %}

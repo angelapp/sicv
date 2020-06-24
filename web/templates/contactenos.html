@@ -1,0 +1,57 @@
+{% extends "base-web.html" %}
+{% load static %}
+
+
+{% block extrastyle %}
+<link rel="stylesheet" href="{% static 'css/login.css'%}" />
+{% endblock %}
+
+
+{% block content %}
+<main role="main" class="container">
+    <div class="d-flex align-items-center p-3 my-3 text-white bg-purple rounded box-shadow bg-principal">
+        <div class="lh-100">
+            <h6 class="mb-0 lh-100 text-center">CONTACTENOS</h6>
+        </div>
+    </div>
+    <div class="my-3 p-3 bg-white rounded box-shadow">
+        <div class="wrapper fadeInDown">
+            <div id="formContent">
+
+                <!-- Icon -->
+                <div class="fadeIn first">
+                    <img src="{% static 'img/logo-ud.png'%}" id="icon" alt="User Icon" />
+                </div>
+
+                <form method="POST">
+                    {% csrf_token %}
+                    {% if guardado %}
+                    <div class="alert alert-success m-2" role="alert">
+                        ¡Hemos registrado tus datos!
+                    </div>
+                    {% endif %}
+
+                    <input type="text" id="name" class="fadeIn second" name="name" placeholder="Nombre completo"
+                        required>
+
+                    <input type="email" id="email" class="fadeIn second" name="email" placeholder="Email" required>
+
+                    <input type="phone" id="phone" class="fadeIn second" name="phone" placeholder="Teléfono" required>
+
+                    <input type="text" id="comentarios" class="fadeIn second" name="comments"
+                        placeholder="Observaciones" required>
+
+                    <select name="programm" required>
+                        <option value="">Programa de interes </option>
+                        {% for programa in programas %}
+                        <option value="{{programa.id}}"> {{programa.nombre}} </option>
+                        {% endfor %}
+                    </select>
+
+
+                    <input type="submit" class="fadeIn fourth bg-button mt-4" value="Enviar">
+                </form>
+            </div>
+        </div>
+</main>
+{% endblock %}

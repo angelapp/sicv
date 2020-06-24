@@ -1,0 +1,82 @@
+{% extends "base-web.html" %}
+{% load static %}
+
+
+{% block content %}
+<main role="main" class="container">
+    <div class="d-flex align-items-center p-3 my-3 text-white bg-purple rounded box-shadow bg-principal">
+        <div class="lh-100">
+            <h6 class="mb-0 lh-100">MAESTRIA CIENCIAS DE LA INFORMACION Y LAS COMUNICACIONES</h6>
+            <small>CURSOS DEL PROGRAMA {{ programa.nombre|upper }}</small>
+        </div>
+    </div>
+
+    <div class="my-3 p-3 bg-white rounded box-shadow">
+        {% if nop is True %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>El usuario no se encuentra inscrito al programa</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% elif noc is True  %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>El usuario no cumple con el pre-requisito</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        {% elif fin is True  %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>El usuario ya realizó el curso</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        {% elif maxc is True  %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>El usuario ya tiene el maxímo de cursos por semestre</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        {% elif insc is True  %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Se ha inscrito el curso</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endif %}
+
+
+
+        {% for curso in cursos %}
+
+        <div class="card text-center mb-3">
+            <div class="card-body">
+                <h5 class="card-title">CURSO: {{ curso.nombre|upper }}</h5>
+                <p class="card-text">{{ curso.descripcion }}</p>
+            </div>
+            <div class="card-footer text-muted">
+                {% if user.is_authenticated %}
+                <a href="/inscribir/{{ programa.id }}/{{ curso.id }}" class="btn btn-primary bg-button">Incribir
+                    curso</a>
+                {% endif %}
+            </div>
+        </div>
+
+
+
+
+
+        {% endfor %}
+
+    </div>
+
+
+</main>
+{% endblock %}
